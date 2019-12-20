@@ -22,9 +22,7 @@ Application must be a command line application which takes a path to a JSON file
 
 This JSON file will contain a JSON array of available projects. Project object contains information like project ID, group, project type, co2_volume, price of emission-reduction unit, min and max credits available to be bought from this project, time and continent.
 
-You can assume that the carbon removal process is linear, so that if reforestation takes one hundred years to complete, after fifty years it has been captured 0.5 of target value.
-
-One important thing is the time field. It describes how long it takes to capture all the CO2 from the atmosphere. Time unit is `day`, `month` or `year`. For example reforestation is cheap, but growth of the trees can take more than a hundred years.
+One important thing is the time field. It describes how long it takes to capture all the CO2 from the atmosphere. Time unit is `day`, `month` or `year`. For example reforestation is cheap, but growth of the trees can take more than a hundred years. You can assume that the carbon removal process is linear, so that if reforestation takes one hundred years to complete, after fifty years it has been captured 0.5 of target value.
 
 The Continental code tells roughly about where the project is located. Continent information is important since you should distribute the risk of success. Different continents provide different setup of projects. Continent code definition:
 
