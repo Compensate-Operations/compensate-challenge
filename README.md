@@ -1,30 +1,31 @@
 # Compensate Challenge
 
-## Background - Carbon emission-reduction projects
+## Background:
+
+The example provided below is simplified for the purposes of this exercise. Purchasing decisions at Compensate are guided by an independent scientific advisory panel and criteria for purchases also takes into consideration e.g. biodiversity and social sustainability factors.
 
 Compensation payments go in full to projects removing carbon from the atmosphere. Purchases are guided by Compensate’s independent Scientific Advisory Panel and certified with Gold Standard and Verified Carbon Standard, with the highest levels of transparency and verification.
 
-In general, the term "emission-reduction project" refers both to projects that reduce greenhouse-gas emissions and projects that remove carbon dioxide from the atmosphere. For the sake of clarity, we divide such projects into two categories. In our terminology, a carbon-emission reduction project is one that reduces emissions (for example, a wind-power project). Meanwhile, a carbon-capture project is one that removes carbon dioxide from the atmosphere (for example, an afforestation project).
+In general, the term "emission reduction project" refers both to projects that reduce greenhouse gas emissions and projects that remove carbon dioxide from the atmosphere. For the sake of clarity, we divide such projects into two categories. In our terminology, a carbon emission reduction project is one that reduces emissions (for example, a wind power project). Meanwhile, a carbon capture project is one that removes carbon dioxide from the atmosphere (for example, an afforestation project).
 
-One emission-reduction unit is equivalent to the removal of one tonne of carbon dioxide (1,000 kg CO2) from the atmosphere. Compensate purchases emission-reduction units from carbon-capture projects. The price of the units is determined by the market and by the particular characteristics of different projects.
+One emission reduction unit is equivalent to the removal of one tonne of carbon dioxide (1,000 kg CO2) from the atmosphere. Compensate purchases emission-reduction units from carbon-capture projects. The price of the units is determined by the market and by the particular characteristics of different projects.
 
 There are a number of different types of projects: forest protection, reforestation, CO2-removal and so on.
+We primarily purchase emissions reduction units from projects that focus on forests, but we are constantly in search of the most sustainable and efficient ways to remove carbon dioxide from the atmosphere. Compensate invests in the planting of new forests and the protection of existing forests. We will always be open and transparent in our operations and make information on the use of compensation payments publicly available on our website.
 
-We primarily purchase emissions reduction units from projects that focus on forests, but we are constantly in search for the most sustainable and efficient ways to remove carbon dioxide from the atmosphere. Compensate invests in the planting of new forests and the protection of existing forests. We will always be open and transparent in our operations and make information on the use of compensation payments publicly available on our website.
-
-The amount of carbon captured by each tree species is measured based on different characteristics, such as height and thickness of the tree and the hardness of the wood. For example, the harder the wood, the higher the carbon content of a tree. These carbon-capture calculations are determined individually for each species of tree by independent, third-party verification experts. In turn, these calculations are then used by the operators of carbon-capture projects.
+The amount of carbon captured by each tree species is measured based on different characteristics, such as height and thickness of the tree and the hardness of the wood. For example, the harder the wood, the higher the carbon content of a tree. These carbon capture calculations are determined individually for each species of tree by independent, third-party verification experts. In turn, these calculations are then used by the operators of carbon capture projects.
 
 ## The task
 
-Your challenge is to create an application that can be used to help optimize how Compensate purchases credits. Note: This example is simplified. Compensate has an independent scientific advisory panel to make the purchasing decisions.
+Your challenge is to create an application that can be used to help optimize how Compensate purchases credits.
 
-Application must be a command line application which takes a path to a JSON file as a command line argument.
+The application must be a command line application which takes a path to a JSON file as a command line argument.
 
-This JSON file will contain a JSON array of available projects. Project object contains information like project ID, group, project type, co2_volume, price of emission-reduction unit, min and max credits available to be bought from this project, time and continent.
+This JSON file will contain a JSON array of available projects. Project object contains information like project ID, group, project type, co2_volume, price of emission reduction unit, min and max credits available to be bought from this project, time and continent.
 
-One important thing is the time field. It describes how long it takes to capture all the CO2 from the atmosphere. Time unit is `day`, `month` or `year`. For example reforestation is cheap, but growth of the trees can take more than a hundred years. You can assume that the carbon removal process is linear, so that if reforestation takes one hundred years to complete, after fifty years it has been captured 0.5 of target value.
+One important thing is the time field. It describes how long it takes to capture all the CO2 from the atmosphere. Time unit is `day`, `month` or `year`. For example reforestation is cheap, but the growth of the trees can take more than a hundred years. You can assume that the carbon removal process is linear, so that if reforestation takes one hundred years to complete, after fifty years 0.5 of the target value has been captured.
 
-The Continental code tells roughly about where the project is located. Continent information is important since you should distribute the risk of success. Different continents provide different setup of projects. Continent code definition:
+The Continental code tells roughly where the project is located. Continent information is important since you should distribute risks. Different continents provide different project setups. Continent code definition:
 
 | Code | Continent Description |
 | --- | --- |
@@ -83,15 +84,15 @@ input.json
 
 Download a full example JSON here. [COMING SOON!]
 
-Your application should calculate solution for purchase plan as follows:
+Your application should calculate a solution for a purchase plan as follows:
 - Minimize the risk by distributing projects over different continents as requested
 - Minimize the risk by distributing projects over different kind of groups (short, medium, long) as requested
-- Calculate the optimal volume of CO2 removed from atmosphere using provided target years and given budget
-- Calculate report what is the amount of CO2 removed yearly from current year to target year using this optimal plan
-- Provide solution as a list of projects and the number of credits to be bought
+- Calculate the optimal volume of CO2 removed from the atmosphere using provided target years and the given budget
+- Calculate and create a report on the amount of CO2 removed yearly from the current year to the target year using this optimal plan
+- Provide the solution as a list of projects and the number of credits to be bought
 - Export the result to JSON file
 
-Application should take following parameters to control how calculation should be done:
+The application should use the following parameters to control how the calculation is done:
 
 ```
 $ myapp [-file <path>]                      Source file of projects
@@ -104,14 +105,13 @@ $ myapp [-file <path>]                      Source file of projects
         [-min_long_term_percent=<value>]    Minimum percentage of long term projects to be bought, defaults to 0
 ```
 
-For example, if have 1000 unit of money and you would like to optimize the plan for 30 years, distribute the risk to four continents, and make sure that the purchase plan contains at least 10% percentage of medium term and 30% percentage of long term carbon removal:
+For example, if you have 1000 units of money and you would like to optimize the plan for 30 years, distribute the risk to four continents, and make sure that the purchase plan contains at least 10% medium term and 30% long term carbon removal targets:
 
 ```
 $ myapp -file input.json -target output.json -money=1000 -target_years=30 -min_continents=4 -min_medium_term_percent=10 -min_long_term_percent=30
 ```
 
-Exported JSON file should contain the list of optimal selected projects and amount of credits to be bought. There should also be the solution of C02 removed as cumulative yearly report.
-Following example describes the format of this JSON file (this is not a correct answer for the example input.json):
+The exported JSON file should contain the list of selected optimal projects and the amount of credits to be bought. There should also be the resulting CO2 removed as a cumulative yearly report. The following example describes the format of this JSON file (this is not a correct answer for the example input.json):
 
 ```
 export.json
@@ -157,7 +157,6 @@ export.json
 ```
 
 You can choose the programming language freely as long as it can be executed from the command line.
-
 You must provide the source codes for the written application and it must be compilable (if applicable) with a single command. You must provide necessary instructions on how to do the compilation.
 
 Grading of the assignment is based on the following criteria:
@@ -166,10 +165,10 @@ Code structure and elegance
 Correctness of the execution
 Performance
 
-Document and share your solution and code with us using Github, email, FAX. Style is free.
+Document and share your solution and code with us using Github, email, FAX. The style is free.
 
-If you have any questions about the challenge or technical details, please contact Compensate Team:
+If you have any questions about the challenge or technical details, please contact the Compensate Team:
 
 Tobias Rask tobias.rask@fourkind.com
 
-Good Luck! We will be more than happy to talk about your solution.
+Good Luck! We look forward to seeing your solution.
