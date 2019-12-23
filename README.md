@@ -17,11 +17,11 @@ The amount of carbon captured by each tree species is measured based on differen
 
 ## The task
 
-Your challenge is to create an application that can be used to help optimize how Compensate purchases credits.
+Your challenge is to create an application that can be used to help optimize how Compensate purchases CO2 products.
 
 The application must be a command line application which takes a path to a JSON file as a command line argument.
 
-This JSON file will contain a JSON array of available projects. Project object contains information like project ID, group, project type, co2_volume, price of emission reduction unit, min and max credits available to be bought from this project, time and continent.
+This JSON file will contain a JSON array of available projects. Project object contains information like project ID, group, project type, co2_volume, price of one product unit, min and max number of units available to be bought from this project, time and continent.
 
 One important thing is the time field. It describes how long it takes to capture all the CO2 from the atmosphere. Time unit is `day`, `month` or `year`. For example reforestation is cheap, but the growth of the trees can take more than a hundred years. You can assume that the carbon removal process is linear, so that if reforestation takes one hundred years to complete, after fifty years 0.5 of the target value has been captured.
 
@@ -48,8 +48,8 @@ input.json
     "type": "capture",
     "co2_volume": 1.0,
     "price": 232.0,
-    "min_credits": 5,
-    "max_credits": 200,
+    "min_units": 5,
+    "max_units": 200,
     "time": 2,
     "time_unit": "day",
     "continent": "c1",
@@ -60,8 +60,8 @@ input.json
     "type": "protection",
     "co2_volume": 30,
     "price": 100.0,
-    "min_credits": 5,
-    "max_credits": 400,
+    "min_units": 5,
+    "max_units": 400,
     "time": 10,
     "time_unit": "year",
     "continent": "c1"
@@ -72,8 +72,8 @@ input.json
     "type": "reforestation",
     "co2_volume": 30,
     "price": "10",
-    "min_credits": 5,
-    "max_credits": 500,
+    "min_units": 5,
+    "max_units": 500,
     "time": 140
     "time_unit": "year",
     "continent": "c2"
@@ -89,7 +89,7 @@ Your application should calculate a solution for a purchase plan as follows:
 - Minimize the risk by distributing projects over different kind of groups (short, medium, long) as requested
 - Calculate the optimal volume of CO2 removed from the atmosphere using provided target years and the given budget
 - Calculate and create a report on the amount of CO2 removed yearly from the current year to the target year using this optimal plan
-- Provide the solution as a list of projects and the number of credits to be bought
+- Provide the solution as a list of projects and the number of product units to be bought
 - Export the result to JSON file
 
 The application should use the following parameters to control how the calculation is done:
@@ -97,7 +97,7 @@ The application should use the following parameters to control how the calculati
 ```
 $ myapp [-file <path>]                      Source file of projects
         [-target <path>]                    Target file where result is stored
-        [-money=<value>]                    Amount of money to be used, defaults to 0
+        [-money=<value>]                    Amount of money to be used
         [-target_years=<value>]             Target years for C02 optimization, defaults to 1
         [-min_continents=<value>]           Minimum number of continents where projects should be distributed, defaults to 1
         [-min_short_term_percent=<value>]   Minimum percentage of short term projects to be bought, defaults to 0
@@ -111,7 +111,7 @@ For example, if you have 1000 units of money and you would like to optimize the 
 $ myapp -file input.json -target output.json -money=1000 -target_years=30 -min_continents=4 -min_medium_term_percent=10 -min_long_term_percent=30
 ```
 
-The exported JSON file should contain the list of selected optimal projects and the amount of credits to be bought. There should also be the resulting CO2 removed as a cumulative yearly report. The following example describes the format of this JSON file (this is not a correct answer for the example input.json):
+The exported JSON file should contain the list of selected optimal projects and the amount of product units to be bought. There should also be the resulting CO2 removed as a cumulative yearly report. The following example describes the format of this JSON file (this is not a correct answer for the example input.json):
 
 ```
 export.json
@@ -120,17 +120,17 @@ export.json
   "purchase_plan": [
     {
       "project_id": "p1",
-      "num_credits": 1,
+      "num_units": 1,
       "price": 232.0
     },
     {
       "project_id": "p2",
-      "num_credits": 2,
+      "num_units": 2,
       "price": 200.0
     },
     {
       "project_id-id": "p3",
-      "num_credits": 56,
+      "num_units": 56,
       "price": 560.0
     }
   ],
