@@ -74,7 +74,7 @@ input.json
     "price": "10",
     "min_units": 5,
     "max_units": 500,
-    "time": 140
+    "time": 140,
     "time_unit": "year",
     "continent": "c2"
   },
@@ -82,7 +82,7 @@ input.json
 ]
 ```
 
-Download a full example JSON here. [COMING SOON!]
+[Download a full example JSON here.](examples/products-2020.json)
 
 Your application should calculate a solution for a purchase plan as follows:
 - Minimize the risk by distributing projects over different continents as requested
